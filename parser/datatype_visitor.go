@@ -165,6 +165,7 @@ func (v *visitor) visitDataType(ctx gen.IDataTypeContext) DataType {
 // visitStringDataType visits a parse tree produced by MySqlParser#stringDataType.
 func (v *visitor) visitStringDataType(ctx *gen.StringDataTypeContext) DataType {
 	v.trace(`VisitStringDataType`)
+
 	text := parseToken(ctx.GetTypeName(), withUpperCase(), withTrim("`"))
 	switch text {
 	case `CHAR`:

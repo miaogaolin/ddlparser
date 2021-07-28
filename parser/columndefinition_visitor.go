@@ -24,6 +24,7 @@ import (
 
 type ColumnDefinition struct {
 	DataType         DataType
+	DataTypeSource   string
 	ColumnConstraint *ColumnConstraint
 }
 
@@ -54,6 +55,7 @@ func (v *visitor) VisitColumnDefinition(ctx *gen.ColumnDefinitionContext) interf
 		out        ColumnDefinition
 	)
 	out.DataType = v.visitDataType(ctx.DataType())
+	out.DataTypeSource = ctx.DataType().GetText()
 	for _, e := range ctx.AllColumnConstraint() {
 		switch tx := e.(type) {
 		case *gen.NullColumnConstraintContext:

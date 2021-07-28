@@ -33,6 +33,7 @@ type Token interface {
 type parseOption func(text string) string
 
 func parseToken(t antlr.Token, option ...parseOption) string {
+	t.GetText()
 	text := t.GetText()
 	for _, o := range option {
 		text = o(text)
