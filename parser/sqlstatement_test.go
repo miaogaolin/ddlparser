@@ -59,11 +59,13 @@ func TestVisitor_VisitSqlStatements(t *testing.T) {
 					ColumnDefinition: &ColumnDefinition{
 						DataType: &NormalDataType{tp: BigInt},
 						ColumnConstraint: &ColumnConstraint{
-							NotNull:         true,
-							HasDefaultValue: true,
-							AutoIncrement:   false,
-							Primary:         true,
-							Comment:         "主键ID",
+							NotNull: true,
+							DefaultValue: DefaultValue{
+								IsHas: true,
+							},
+							AutoIncrement: false,
+							Primary:       true,
+							Comment:       "主键ID",
 						},
 					},
 				},
@@ -99,10 +101,12 @@ func TestVisitor_VisitSqlStatements(t *testing.T) {
 					Name:     "id",
 					DataType: &NormalDataType{tp: BigInt},
 					Constraint: &ColumnConstraint{
-						NotNull:         true,
-						HasDefaultValue: true,
-						Primary:         true,
-						Comment:         "主键ID",
+						NotNull: true,
+						DefaultValue: DefaultValue{
+							IsHas: true,
+						},
+						Primary: true,
+						Comment: "主键ID",
 					},
 				},
 			},
@@ -114,20 +118,24 @@ func TestVisitor_VisitSqlStatements(t *testing.T) {
 					Name:     "id",
 					DataType: &NormalDataType{tp: BigInt},
 					Constraint: &ColumnConstraint{
-						NotNull:         true,
-						HasDefaultValue: true,
-						Primary:         true,
-						Comment:         "主键ID",
+						NotNull: true,
+						DefaultValue: DefaultValue{
+							IsHas: true,
+						},
+						Primary: true,
+						Comment: "主键ID",
 					},
 				},
 				{
 					Name:     "name",
 					DataType: &NormalDataType{tp: VarChar},
 					Constraint: &ColumnConstraint{
-						NotNull:         true,
-						HasDefaultValue: true,
-						Key:             true,
-						Comment:         "学生姓名",
+						NotNull: true,
+						DefaultValue: DefaultValue{
+							IsHas: true,
+						},
+						Key:     true,
+						Comment: "学生姓名",
 					},
 				},
 			},

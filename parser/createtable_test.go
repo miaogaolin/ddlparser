@@ -79,9 +79,11 @@ func TestVisitor_VisitCreateTable(t *testing.T) {
 					ColumnDefinition: &ColumnDefinition{
 						DataType: &NormalDataType{tp: VarChar},
 						ColumnConstraint: &ColumnConstraint{
-							NotNull:         true,
-							Comment:         "学号",
-							HasDefaultValue: true,
+							NotNull: true,
+							Comment: "学号",
+							DefaultValue: DefaultValue{
+								IsHas: true,
+							},
 						},
 					},
 				},
@@ -99,9 +101,11 @@ func TestVisitor_VisitCreateTable(t *testing.T) {
 					ColumnDefinition: &ColumnDefinition{
 						DataType: &NormalDataType{tp: VarChar},
 						ColumnConstraint: &ColumnConstraint{
-							NotNull:         true,
-							Comment:         "用户密码",
-							HasDefaultValue: true,
+							NotNull: true,
+							Comment: "用户密码",
+							DefaultValue: DefaultValue{
+								IsHas: true,
+							},
 						},
 					},
 				},
@@ -127,7 +131,9 @@ func TestVisitor_VisitCreateTable(t *testing.T) {
 					ColumnDefinition: &ColumnDefinition{
 						DataType: &NormalDataType{tp: Timestamp},
 						ColumnConstraint: &ColumnConstraint{
-							HasDefaultValue: true,
+							DefaultValue: DefaultValue{
+								IsHas: true,
+							},
 						},
 					},
 				},
@@ -173,11 +179,13 @@ func TestVisitor_VisitCreateTable(t *testing.T) {
 					ColumnDefinition: &ColumnDefinition{
 						DataType: &NormalDataType{tp: BigInt},
 						ColumnConstraint: &ColumnConstraint{
-							NotNull:         true,
-							HasDefaultValue: true,
-							AutoIncrement:   true,
-							Primary:         true,
-							Comment:         "id",
+							NotNull: true,
+							DefaultValue: DefaultValue{
+								IsHas: true,
+							},
+							AutoIncrement: true,
+							Primary:       true,
+							Comment:       "id",
 						},
 					},
 				},
@@ -186,9 +194,11 @@ func TestVisitor_VisitCreateTable(t *testing.T) {
 					ColumnDefinition: &ColumnDefinition{
 						DataType: &NormalDataType{tp: VarChar},
 						ColumnConstraint: &ColumnConstraint{
-							NotNull:         true,
-							Comment:         "班级id",
-							HasDefaultValue: true,
+							NotNull: true,
+							Comment: "班级id",
+							DefaultValue: DefaultValue{
+								IsHas: true,
+							},
 						},
 					},
 				},
@@ -197,10 +207,12 @@ func TestVisitor_VisitCreateTable(t *testing.T) {
 					ColumnDefinition: &ColumnDefinition{
 						DataType: &NormalDataType{tp: Char},
 						ColumnConstraint: &ColumnConstraint{
-							NotNull:         true,
-							Key:             true,
-							Comment:         "姓名",
-							HasDefaultValue: true,
+							NotNull: true,
+							Key:     true,
+							Comment: "姓名",
+							DefaultValue: DefaultValue{
+								IsHas: true,
+							},
 						},
 					},
 				},
@@ -209,10 +221,12 @@ func TestVisitor_VisitCreateTable(t *testing.T) {
 					ColumnDefinition: &ColumnDefinition{
 						DataType: &NormalDataType{tp: VarChar},
 						ColumnConstraint: &ColumnConstraint{
-							NotNull:         true,
-							Unique:          true,
-							Comment:         "手机号",
-							HasDefaultValue: true,
+							NotNull: true,
+							Unique:  true,
+							Comment: "手机号",
+							DefaultValue: DefaultValue{
+								IsHas: true,
+							},
 						},
 					},
 				},
@@ -224,9 +238,11 @@ func TestVisitor_VisitCreateTable(t *testing.T) {
 							value: []string{"男", "女"},
 						},
 						ColumnConstraint: &ColumnConstraint{
-							NotNull:         true,
-							HasDefaultValue: true,
-							Comment:         "性别",
+							NotNull: true,
+							DefaultValue: DefaultValue{
+								IsHas: true,
+							},
+							Comment: "性别",
 						},
 					},
 				},
@@ -237,9 +253,11 @@ func TestVisitor_VisitCreateTable(t *testing.T) {
 							tp: Boolean,
 						},
 						ColumnConstraint: &ColumnConstraint{
-							NotNull:         true,
-							HasDefaultValue: true,
-							Comment:         "标志位",
+							NotNull: true,
+							DefaultValue: DefaultValue{
+								IsHas: true,
+							},
+							Comment: "标志位",
 						},
 					},
 				},

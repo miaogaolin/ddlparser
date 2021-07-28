@@ -37,10 +37,13 @@ func TestVisitor_VisitColumnDefinition(t *testing.T) {
 	columnDefinition := v.(*ColumnDefinition)
 
 	assert.Equal(t, ColumnConstraint{
-		NotNull:         true,
-		HasDefaultValue: true,
-		Primary:         true,
-		Comment:         "test comment",
+		NotNull: true,
+		DefaultValue: DefaultValue{
+			Value: "test default",
+			IsHas: true,
+		},
+		Primary: true,
+		Comment: "test comment",
 	}, *columnDefinition.ColumnConstraint)
 
 	v, err = p.testMysqlSyntax("test.sql", accept, `bigint(20) NULL KEY`)
@@ -78,8 +81,11 @@ func TestVisitor_VisitColumnDefinition(t *testing.T) {
 	columnDefinition = v.(*ColumnDefinition)
 
 	assert.Equal(t, ColumnConstraint{
-		HasDefaultValue: true,
-		AutoIncrement:   true,
-		Unique:          true,
+		DefaultValue: DefaultValue{
+			Value: "",
+			IsHas: true,
+		},
+		AutoIncrement: true,
+		Unique:        true,
 	}, *columnDefinition.ColumnConstraint)
 }

@@ -27,14 +27,19 @@ type ColumnDefinition struct {
 	ColumnConstraint *ColumnConstraint
 }
 
+type DefaultValue struct {
+	Value string
+	IsHas bool
+}
+
 type ColumnConstraint struct {
-	NotNull         bool
-	HasDefaultValue bool
-	AutoIncrement   bool
-	Primary         bool
-	Key             bool
-	Unique          bool
-	Comment         string
+	NotNull       bool
+	DefaultValue  DefaultValue
+	AutoIncrement bool
+	Primary       bool
+	Key           bool
+	Unique        bool
+	Comment       string
 }
 
 type key bool
@@ -54,7 +59,8 @@ func (v *visitor) VisitColumnDefinition(ctx *gen.ColumnDefinitionContext) interf
 		case *gen.NullColumnConstraintContext:
 			constraint.NotNull = v.visitNullColumnConstraint(tx)
 		case *gen.DefaultColumnConstraintContext:
-			constraint.HasDefaultValue = v.visitDefaultColumnConstraint(tx)
+			defaultValue := v.visitDefaultColumnConstraint(tx)
+			constraint.DefaultValue = defaultValue
 		case *gen.AutoIncrementColumnConstraintContext:
 			constraint.AutoIncrement = v.visitAutoIncrementColumnConstraint(tx)
 		case *gen.PrimaryKeyColumnConstraintContext:
@@ -89,7 +95,7 @@ func (v *visitor) visitNullColumnConstraint(ctx *gen.NullColumnConstraintContext
 }
 
 // visitDefaultColumnConstraint visits a parse tree produced by MySqlParser#defaultColumnConstraint.
-func (v *visitor) visitDefaultColumnConstraint(ctx *gen.DefaultColumnConstraintContext) bool {
+func (v *visitor) visitDefaultColumnConstraint(ctx *gen.DefaultColumnConstraintContext) DefaultValue {
 	v.trace("VisitDefaultColumnConstraint")
 	text := ctx.DefaultValue().GetText()
 	text = strings.Trim(text, "`")
@@ -97,10 +103,12 @@ func (v *visitor) visitDefaultColumnConstraint(ctx *gen.DefaultColumnConstraintC
 	replacer := strings.NewReplacer("\r", "", "\n", "")
 	text = replacer.Replace(text)
 	if strings.ToUpper(text) == "NULL" {
-		return false
+		return DefaultValue{
+			IsHas: false,
+		}
 	}
 
-	return true
+	return DefaultValue{Value: text, IsHas: true}
 }
 
 // visitAutoIncrementColumnConstraint visits a parse tree produced by MySqlParser#autoIncrementColumnConstraint.
