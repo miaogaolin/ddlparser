@@ -132,6 +132,7 @@ func TestVisitor_VisitCreateTable(t *testing.T) {
 						DataType: &NormalDataType{tp: Timestamp},
 						ColumnConstraint: &ColumnConstraint{
 							DefaultValue: DefaultValue{
+								Value: "CURRENT_TIMESTAMPONUPDATECURRENT_TIMESTAMP",
 								IsHas: true,
 							},
 						},
@@ -181,6 +182,7 @@ func TestVisitor_VisitCreateTable(t *testing.T) {
 						ColumnConstraint: &ColumnConstraint{
 							NotNull: true,
 							DefaultValue: DefaultValue{
+								Value: "0",
 								IsHas: true,
 							},
 							AutoIncrement: true,
@@ -240,6 +242,7 @@ func TestVisitor_VisitCreateTable(t *testing.T) {
 						ColumnConstraint: &ColumnConstraint{
 							NotNull: true,
 							DefaultValue: DefaultValue{
+								Value: "男",
 								IsHas: true,
 							},
 							Comment: "性别",
@@ -255,6 +258,7 @@ func TestVisitor_VisitCreateTable(t *testing.T) {
 						ColumnConstraint: &ColumnConstraint{
 							NotNull: true,
 							DefaultValue: DefaultValue{
+								Value: "false",
 								IsHas: true,
 							},
 							Comment: "标志位",

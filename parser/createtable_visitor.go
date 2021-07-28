@@ -147,9 +147,10 @@ type Table struct {
 }
 
 type Column struct {
-	Name       string
-	DataType   DataType
-	Constraint *ColumnConstraint
+	Name           string
+	DataType       DataType
+	DataTypeSource string
+	Constraint     *ColumnConstraint
 }
 
 func (c *CreateTable) Convert() *Table {
@@ -161,6 +162,7 @@ func (c *CreateTable) Convert() *Table {
 		data.Name = e.Name
 		if definition != nil {
 			data.DataType = definition.DataType
+			data.DataTypeSource = definition.DataTypeSource
 			data.Constraint = definition.ColumnConstraint
 		}
 		ret.Columns = append(ret.Columns, &data)
