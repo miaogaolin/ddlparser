@@ -85,26 +85,20 @@ func parseDataTypeSource(ctx gen.IDataTypeContext) string {
 		}
 
 	case *gen.NationalStringDataTypeContext:
-		source = t.GetTypeName().GetText()
-		if t.LengthOneDimension() != nil {
-			source += t.LengthOneDimension().GetText()
-		}
+		source = t.GetText()
 	case *gen.NationalVaryingStringDataTypeContext:
-		source = t.GetTypeName().GetText()
-		if t.LengthOneDimension() != nil {
-			source += t.LengthOneDimension().GetText()
-		}
+		source = t.GetText()
 	case *gen.DimensionDataTypeContext:
-		source = t.GetTypeName().GetText()
-		if t.LengthOneDimension() != nil {
-			source += t.LengthOneDimension().GetText()
-		}
+		source = t.GetText()
 	case *gen.SimpleDataTypeContext:
-		source = t.GetTypeName().GetText()
+		source = t.GetText()
 	case *gen.CollectionDataTypeContext:
 		source = t.GetTypeName().GetText()
+		if t.CollectionOptions() != nil {
+			source += t.CollectionOptions().GetText()
+		}
 	case *gen.SpatialDataTypeContext:
-		source = t.GetTypeName().GetText()
+		source = t.GetText()
 	case *gen.LongVarcharDataTypeContext:
 		source = t.GetTypeName().GetText()
 	case *gen.LongVarbinaryDataTypeContext:
