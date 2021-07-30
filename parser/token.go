@@ -19,6 +19,8 @@ package parser
 import (
 	"strings"
 
+	"github.com/miaogaolin/ddlparser/gen"
+
 	"github.com/antlr/antlr4/runtime/Go/antlr"
 )
 
@@ -65,4 +67,48 @@ func withReplacer(oldnew ...string) parseOption {
 	return func(text string) string {
 		return strings.NewReplacer(oldnew...).Replace(text)
 	}
+}
+
+func parseDataTypeSource(ctx gen.IDataTypeContext) string {
+	if ctx == nil {
+		return ""
+	}
+	source := ""
+	switch t := ctx.(type) {
+	case *gen.StringDataTypeContext:
+		source = t.GetTypeName().GetText()
+		if t.LengthOneDimension() != nil {
+			source += t.LengthOneDimension().GetText()
+		}
+		if t.GetBinaryType() != nil {
+			source += t.GetBinaryType().GetText()
+		}
+
+	case *gen.NationalStringDataTypeContext:
+		source = t.GetTypeName().GetText()
+		if t.LengthOneDimension() != nil {
+			source += t.LengthOneDimension().GetText()
+		}
+	case *gen.NationalVaryingStringDataTypeContext:
+		source = t.GetTypeName().GetText()
+		if t.LengthOneDimension() != nil {
+			source += t.LengthOneDimension().GetText()
+		}
+	case *gen.DimensionDataTypeContext:
+		source = t.GetTypeName().GetText()
+		if t.LengthOneDimension() != nil {
+			source += t.LengthOneDimension().GetText()
+		}
+	case *gen.SimpleDataTypeContext:
+		source = t.GetTypeName().GetText()
+	case *gen.CollectionDataTypeContext:
+		source = t.GetTypeName().GetText()
+	case *gen.SpatialDataTypeContext:
+		source = t.GetTypeName().GetText()
+	case *gen.LongVarcharDataTypeContext:
+		source = t.GetTypeName().GetText()
+	case *gen.LongVarbinaryDataTypeContext:
+		source = t.GetText()
+	}
+	return source
 }
